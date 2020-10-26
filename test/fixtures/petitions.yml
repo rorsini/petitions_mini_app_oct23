@@ -5,11 +5,11 @@ one:
   slug: MyString
   body: MyText
   letter: MyText
-  signatures: 0
+  total_signatures: 0
 
 two:
   title: MyString
   slug: MyString
   body: MyText
   letter: MyText
-  signatures: 0
+  total_signatures: 0

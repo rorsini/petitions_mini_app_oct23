@@ -63,11 +63,15 @@ class PetitionsController < ApplicationController
     end
   end
 
-
-  # POST /petitions/:id/signatures
+  # POST /petitions/:petition_id/signatures
   def signatures
-    @petition.increment!(:signatures)
-    redirect_to @petition, notice: "Thanks #{params[:name]}! Your signature has been recorded."
+    display_name = params[:show_name] ? params[:name] : 'Anonymous'
+    if @petition.signatures.create!(name: display_name)
+      @petition.increment!(:total_signatures)
+      redirect_to @petition, notice: "Thanks #{params[:name]}! Your signature has been recorded."
+    else
+      redirect_to @petition
+    end
   end
 
   private

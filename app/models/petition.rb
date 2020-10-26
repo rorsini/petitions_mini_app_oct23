@@ -1,4 +1,6 @@
 class Petition < ApplicationRecord
+  has_many :signatures
+
   validates_presence_of :title, :body
 
   extend FriendlyId

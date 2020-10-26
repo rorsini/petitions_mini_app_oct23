@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_10_07_214104) do
+ActiveRecord::Schema.define(version: 2020_10_26_020543) do
 
   create_table "admin_users", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -29,9 +29,17 @@ ActiveRecord::Schema.define(version: 2019_10_07_214104) do
     t.string "slug"
     t.text "body"
     t.text "letter"
-    t.integer "signatures", default: 0
+    t.integer "total_signatures", default: 0
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "signatures", force: :cascade do |t|
+    t.integer "petition_id"
+    t.text "name"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["petition_id"], name: "index_signatures_on_petition_id"
   end
 
 end

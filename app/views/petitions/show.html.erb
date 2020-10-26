@@ -11,16 +11,23 @@
     <%= @petition.letter.try(:html_safe) %>
 
     <%= form_tag petition_signatures_path(@petition) do %>
-      <%= text_field_tag :name, nil, placeholder: "Your name", id: "signature_name" %>
-      <%= submit_tag "Sign" %>
+      <div>
+        <%= text_field_tag :name, nil, placeholder: "Your name", id: "signature_name" %>
+        <%= submit_tag "Sign" %>
+      </div>
+      <div>
+        <%= check_box_tag 'show_name' %> Can we display your name? <i>(If not, we'll use "Anonymous".)</i>
+      </div>
     <% end %>
   </div>
 
   <div class="signatures">
-    <% if @petition.signatures.zero? %>
+    <% if @petition.total_signatures.zero? %>
       No signatures yet!
     <% else %>
-      <%= pluralize(@petition.signatures, "signature") %> so far
+      <p><%= pluralize(@petition.total_signatures, "signature") %> so far!</p>
+
+      <%= render @petition.signatures.where('signatures.created_at > ?', 1.week.ago).reverse %>
     <% end %>
   </div>
 
