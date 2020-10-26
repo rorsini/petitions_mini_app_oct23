@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Petitions Mini App</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+
+    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload' %>
+    <%= javascript_include_tag 'application', 'data-turbolinks-track': 'reload' %>
+  </head>
+
+  <body>
+    <div id="page">
+      <% unless current_admin_user.present? %>
+        <div class="menu"><%= link_to "Sign in", new_admin_user_session_path %></div>
+      <% end %>
+
+      <%= yield %>
+    </div>
+  </body>
+</html>

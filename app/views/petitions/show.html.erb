@@ -1,0 +1,29 @@
+<h1><%= @petition.title %></h1>
+
+<%= link_to 'Edit this petition', edit_petition_path(@petition) if current_admin_user %>
+
+<% if notice.present? %><p id="notice"><%= notice %></p><% end %>
+
+<div class="petition">
+  <%= @petition.body.html_safe %>
+
+  <div class="letter">
+    <%= @petition.letter.try(:html_safe) %>
+
+    <%= form_tag petition_signatures_path(@petition) do %>
+      <%= text_field_tag :name, nil, placeholder: "Your name", id: "signature_name" %>
+      <%= submit_tag "Sign" %>
+    <% end %>
+  </div>
+
+  <div class="signatures">
+    <% if @petition.signatures.zero? %>
+      No signatures yet!
+    <% else %>
+      <%= pluralize(@petition.signatures, "signature") %> so far
+    <% end %>
+  </div>
+
+</div>
+
+

@@ -1,0 +1,13 @@
+<% if notice.present? %><p id="notice"><%= notice %></p><% end %>
+
+<h1>Petitions</h1>
+
+<ul>
+  <% @petitions.each do |petition| %>
+    <li>
+      <td><%= link_to petition.title, petition %></td>
+    </li>
+  <% end %>
+</ul>
+
+<%= link_to 'New Petition', new_petition_path if current_admin_user %>
